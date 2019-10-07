@@ -47,22 +47,7 @@ class TestDeck(unittest.TestCase):
         b.shuffle()
         self.assertEqual(len(a.my_deck), len(a.my_deck), "shuffling the deck should not change its size")
         self.assertEqual(len(b.my_deck), len(b.my_deck), "shuffling the deck should not change its size")
-
-class TestHand(unittest.TestCase):
-    def test_hand(self):
-        a, h = Deck(), Hand()
-        tot = 0
-        cards = []
-        for _ in range(10):
-            card = a.deal()
-            cards.append(card)
-            h.add_card(card)
-        for card in cards:
-            tot += card.rank
-        self.assertEqual(h.hand_value(), tot, "checking hand sum")
-        print("Hand Init: PASSED")
-        
-            
+               
 
 if __name__ == "__main__":
     print("Running: Testing.py -----")
