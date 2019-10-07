@@ -4,7 +4,6 @@ Author: Japjot Singh
 """
 import unittest
 
-# Card Class
 class Card:
     """
     Every card has a rank and suit, rank must either be a number in [1, 13]
@@ -17,6 +16,18 @@ class Card:
             raise ValueError("Invaild Card initialization: [Rank:{} Suit:{}]".format(self.rank, self.suit))
         self.rank = rank
         self.suit = suit
+
+    def get_value(self):
+        """
+        Return the value of this card as a list
+        """
+        if self.rank == 1:
+            # an ace is worth 1 or 11
+            return [1, 11]
+        elif self.rank > 10:
+            return [10]
+        else:
+            return [self.rank]
 
 
 
