@@ -3,7 +3,7 @@ Contains unit tests for Blackjack game
 Author: Japjot Singh
 """
 import unittest
-from helper import Card
+from helper import Card, Deck
 
 class TestCard(unittest.TestCase):
     def test_rank_suit_vals(self):
@@ -24,6 +24,15 @@ class TestCard(unittest.TestCase):
         self.assertEqual(c.get_value()[1], 11)
         self.assertEqual(d.get_value()[0], 10)
         print("Card Values: PASSED")
+
+class TestDeck(unittest.TestCase):
+    def test_deck_init(self):
+        self.assertRaises(ValueError, Deck, 0)
+        self.assertRaises(ValueError, Deck, -1)
+        self.assertRaises(ValueError, Deck, 14)
+        self.assertRaises(ValueError, Deck, "Yes")
+        self.assertRaises(ValueError, Deck, None)
+        print("Deck Init: PASSED")
 
 if __name__ == "__main__":
     print("Running: Testing.py -----")

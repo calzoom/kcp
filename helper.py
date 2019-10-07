@@ -29,7 +29,16 @@ class Card:
         else:
             return [self.rank]
 
-
+class Deck:
+    # based off casino rules you can use up to 6-decks
+    cards_in_single_deck = 52
+    num_decks = None
+    num_cards = None
+    def __init__(self, num_decks=1):
+        if num_decks not in range(1, 7):
+            raise ValueError("Invalid Deck Size of {}".format(num_decks))
+        self.num_decks = num_decks
+        self.num_cards = self.num_decks * self.cards_in_single_deck
 
 if __name__ == "__main__":
     a = Card("neck", "Spades")
