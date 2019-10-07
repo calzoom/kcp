@@ -48,6 +48,10 @@ class TestDeck(unittest.TestCase):
         self.assertEqual(len(a.my_deck), len(a.my_deck), "shuffling the deck should not change its size")
         self.assertEqual(len(b.my_deck), len(b.my_deck), "shuffling the deck should not change its size")
 
+# class TestGame(unittest.TestCase):
+#     def test_game_init(self):
+            
+
 if __name__ == "__main__":
     print("Running: Testing.py -----")
     unittest.main()

@@ -12,7 +12,7 @@ class Card:
     where Ace is 1, Jack is 11, Queen is 12, and King is 13
     """
     suits = ("Spade", "Clover", "Heart", "Diamond")
-    ranks = range(1, 14)
+    ranks = list(range(1, 14))
     rank = None
     suit = None
 
