@@ -4,6 +4,7 @@ Author: Japjot Singh
 """
 import unittest
 import random
+from collections import deque
 
 class Card:
     """
@@ -41,27 +42,47 @@ class Deck:
 
     # these values will change 
     my_deck = None
+    discard_pile = None
     cards_remaining = None
-
 
     def __init__(self, num_decks=1):
         if num_decks not in range(1, 7):
             raise ValueError("Invalid Deck Size of {}".format(num_decks))
+
         self.num_decks = num_decks
         self.num_cards = self.num_decks * self.cards_in_single_deck
-        init_deck(self.num_decks)
-        self.cards_remaining = self.num_cards
+
+        self.init_deck()
     
-    def init_deck(num_decks):
-        self.my_deck = []
+    def shuffle(self):
+        random.shuffle(self.my_deck)
+
+    def init_deck(self):
+        self.my_deck = deque([])
+        self.discard_pile = []
+
         for _ in range(self.num_decks):
             for suit in Card.suits:
                 for rank in Card.ranks:
                     self.my_deck.append(Card(rank, suit))
-        self.shuffle()
 
-    def shuffle(self):
-        random.shuffle(self.my_deck)
+        self.shuffle()
+        self.cards_remaining = self.num_cards
+    
+    def deal(self):
+        """
+        If there are no cards remaining, shuffle the discard pile, empty it, and update new variables
+        Return the card at the top of the deck, put it in this discard pile, and decrement cards_remaining
+        """
+        if self.cards_remaining == 0:
+            self.init_deck()
+
+        card = self.my_deck.popleft()
+        self.discard_pile.append(card)
+
+        self.cards_remaining -= 1
+
+        return card
 
     def read_deck(self):
         for card in self.my_deck:
@@ -71,18 +92,9 @@ class Deck:
     def read_values(self):
         for card in self.my_deck:
             print(card.rank)
-    
-    def deal(self):
-        """
-        If there are no cards remaining, shuffle the discard pile --> now the new deck and update variables
-        Return the card at the top of the deck, put it in this decks discard pile, and decrement cards_remaining
-        """
-        if cards_remaining == 0:
-
-
 
 if __name__ == "__main__":
     d = Deck()
-    d.shuffle()
-    d.read_values()
+    for _ in range(1000):
+        print(d.deal().rank)
     print("running helper.py main")
