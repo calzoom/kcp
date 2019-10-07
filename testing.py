@@ -32,7 +32,21 @@ class TestDeck(unittest.TestCase):
         self.assertRaises(ValueError, Deck, 14)
         self.assertRaises(ValueError, Deck, "Yes")
         self.assertRaises(ValueError, Deck, None)
+        a, b, c = Deck(), Deck(2), Deck(6)
+        self.assertEqual(a.num_decks, 1)
+        self.assertEqual(b.num_decks, 2)
+        self.assertEqual(c.num_decks, 6)
+        self.assertEqual(a.num_cards, 52)
+        self.assertEqual(b.num_cards, 52*2)
+        self.assertEqual(c.num_cards, 52*6)
         print("Deck Init: PASSED")
+    
+    def test_shuffle(self):
+        a, b = Deck(), Deck(6)
+        a.shuffle()
+        b.shuffle()
+        self.assertEqual(len(a.my_deck), len(a.my_deck), "shuffling the deck should not change its size")
+        self.assertEqual(len(b.my_deck), len(b.my_deck), "shuffling the deck should not change its size")
 
 if __name__ == "__main__":
     print("Running: Testing.py -----")
