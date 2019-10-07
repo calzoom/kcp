@@ -93,6 +93,21 @@ class Deck:
         for card in self.my_deck:
             print(card.rank)
 
+class Hand:
+    cards = None
+
+    def __init__(self):
+        self.cards = []
+
+    def add_card(self, card):
+        self.cards.append(card)
+    
+    def hand_value(self):
+        tot = 0
+        for card in self.cards:
+            tot += card.rank
+        return tot
+
 if __name__ == "__main__":
     d = Deck()
     for _ in range(1000):

@@ -3,7 +3,7 @@ Contains unit tests for Blackjack game
 Author: Japjot Singh
 """
 import unittest
-from helper import Card, Deck
+from helper import Card, Deck, Hand
 
 class TestCard(unittest.TestCase):
     def test_rank_suit_vals(self):
@@ -48,8 +48,20 @@ class TestDeck(unittest.TestCase):
         self.assertEqual(len(a.my_deck), len(a.my_deck), "shuffling the deck should not change its size")
         self.assertEqual(len(b.my_deck), len(b.my_deck), "shuffling the deck should not change its size")
 
-# class TestGame(unittest.TestCase):
-#     def test_game_init(self):
+class TestHand(unittest.TestCase):
+    def test_hand(self):
+        a, h = Deck(), Hand()
+        tot = 0
+        cards = []
+        for _ in range(10):
+            card = a.deal()
+            cards.append(card)
+            h.add_card(card)
+        for card in cards:
+            tot += card.rank
+        self.assertEqual(h.hand_value(), tot, "checking hand sum")
+        print("Hand Init: PASSED")
+        
             
 
 if __name__ == "__main__":
