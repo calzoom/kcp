@@ -102,11 +102,41 @@ class Hand:
     def add_card(self, card):
         self.cards.append(card)
     
+    def contains_ace(self):
+        for card in self.cards:
+            if card.rank == 1:
+                return True
+
     def hand_value(self):
         tot = 0
+
         for card in self.cards:
-            tot += card.rank
+            if card.rank == 1:
+                if tot >= 11: tot += 1
+                else: tot += 11
+            else: 
+                tot += card.get_value()[0]
+
         return tot
+    
+    def get_hand(self):
+        hand = []
+        for card in self.cards:
+            rank = card.rank
+            name = None
+            if rank == 1:
+                name = "A"
+            elif rank == 11:
+                name = "Jack"
+            elif rank == 12:
+                name = "Queen"
+            elif rank == 11:
+                name = "King"
+            else:
+                name = rank
+            hand.append(name)
+        return hand
+
 
 if __name__ == "__main__":
     d = Deck()
